@@ -1,0 +1,23 @@
+{
+  "name": "Dramini — Dramas courts premium",
+  "short_name": "Dramini",
+  "description": "La plateforme premium de séries courtes. Intense, sans publicité, sans compte.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0f16",
+  "theme_color": "#0b0f16",
+  "icons": [
+    {
+      "src": "/assets/icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

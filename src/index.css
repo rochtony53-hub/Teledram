@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ————— Dramini design tokens ————— */
+@layer base {
+  :root {
+    /* primitives */
+    --ink: oklch(14% 0.02 255);          /* near-black navy */
+    --ink-2: oklch(18% 0.025 255);       /* raised surface */
+    --ink-3: oklch(23% 0.025 255);       /* hover surface */
+    --line: oklch(28% 0.02 255 / 0.6);
+    --bone: oklch(96% 0.01 80);          /* primary text */
+    --mist: oklch(74% 0.02 255);         /* secondary text */
+    --dim: oklch(58% 0.02 255);          /* tertiary text */
+    --gold: oklch(72% 0.11 75);          /* accent bronze-gold */
+    --gold-2: oklch(84% 0.09 85);        /* cream gold */
+    --blood: oklch(58% 0.19 25);         /* crimson, semantic from palette */
+
+    /* spring easings — hardware accelerated */
+    --spring-1: linear(0, 0.002 0.4%, 0.008 0.9%, 0.029 1.8%, 0.065 2.8%, 0.117 3.9%, 0.235 5.9%, 0.515 10.1%, 0.634 12%, 0.746 14%, 0.837 15.9%, 0.914 17.9%, 0.946 18.9%, 0.976 20%, 1 21%, 1.021 22.1%, 1.038 23.2%, 1.052 24.4%, 1.063 25.8%, 1.07 27.3%, 1.073 28.9%, 1.071 30.7%, 1.061 33.7%, 1.028 40.9%, 1.013 44.7%, 1.002 49%, 0.996 53.7%, 0.995 59.2%, 1 78.3%, 1);
+    --spring-soft: linear(0, 0.002 0.6%, 0.007 1.2%, 0.014 1.8%, 0.027 2.5%, 0.042 3.2%, 0.061 3.9%, 0.112 5.5%, 0.161 6.8%, 0.222 8.3%, 0.481 14.1%, 0.595 16.8%, 0.649 18.2%, 0.701 19.6%, 0.748 21%, 0.789 22.3%, 0.826 23.6%, 0.863 25%, 0.893 26.3%, 0.922 27.7%, 0.947 29.1%, 0.969 30.5%, 0.987 31.9%, 1.004 33.4%, 1.025 35.9%, 1.039 38.5%, 1.047 41.4%, 1.05 44.6%, 1.045 49.4%, 1.016 63.6%, 1.004 72.5%, 1 77.6%, 0.998 83.3%, 1);
+    --quart-out: cubic-bezier(0.25, 1, 0.5, 1);
+
+    color-scheme: dark;
+  }
+
+  html {
+    scrollbar-width: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    @apply bg-ink text-bone antialiased;
+    font-family: "Archivo", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Oswald", "Archivo", sans-serif;
+  }
+  .font-accent {
+    font-family: "Cormorant Garamond", serif;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .text-display {
+    font-family: "Oswald", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+  }
+}
+
+/* ————— film grain ————— */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -100%;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.9s steps(3) infinite;
+}
+@keyframes grain-shift {
+  0% { transform: translate3d(1%, -1%, 0); }
+  25% { transform: translate3d(-4%, 3%, 0); }
+  50% { transform: translate3d(3%, -5%, 0); }
+  75% { transform: translate3d(-3%, -2%, 0); }
+  100% { transform: translate3d(2%, 4%, 0); }
+}
+
+/* ————— rails ————— */
+.rail {
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1rem;
+}
+.rail > * {
+  scroll-snap-align: start;
+}
+
+/* ————— view & hero entrances ————— */
+@keyframes hero-fill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+.hero-slide {
+  opacity: 0;
+  transition: opacity 0.8s var(--quart-out);
+}
+.hero-slide.active {
+  opacity: 1;
+}
+.hero-kicker {
+  animation: fade-up 0.5s var(--quart-out) both;
+}
+.hero-title {
+  animation: title-in 0.8s var(--spring-soft) 0.05s both;
+}
+@keyframes title-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) rotateX(-18deg);
+    transform-origin: bottom left;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotateX(0);
+  }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.page-enter {
+  animation: fade-up 0.35s var(--quart-out) both;
+}
+
+/* ————— hero progress bars ————— */
+.hero-progress {
+  height: 2px;
+  background: oklch(100% 0 0 / 0.2);
+  overflow: hidden;
+}
+.hero-progress > span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--gold);
+}
+
+/* ————— player range ————— */
+input[type="range"].seek {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--gold) 0%, var(--gold) var(--fill, 0%), oklch(100% 0 0 / 0.25) var(--fill, 0%));
+  cursor: pointer;
+}
+input[type="range"].seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--gold-2);
+  border: none;
+  transition: transform 0.2s var(--quart-out);
+}
+input[type="range"].seek::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+}
+input[type="range"].seek::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--gold-2);
+  border: none;
+}
