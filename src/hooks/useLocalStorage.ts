@@ -32,8 +32,8 @@ export interface WatchProgress {
 }
 
 export function useWatchHistory() {
-  const [history, setHistory] = useLocalStorage<WatchProgress[]>("dramini:history", []);
-  const [favorites, setFavorites] = useLocalStorage<string[]>("dramini:favorites", []);
+  const [history, setHistory] = useLocalStorage<WatchProgress[]>("teledram:history", []);
+  const [favorites, setFavorites] = useLocalStorage<string[]>("teledram:favorites", []);
 
   const upsertProgress = useCallback((p: WatchProgress) => {
     setHistory((h) => {

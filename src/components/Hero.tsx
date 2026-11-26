@@ -54,7 +54,7 @@ export function Hero({ dramas, onPlay, onOpen, isFav, onToggleFav }: Props) {
         <div key={drama.id} className="max-w-2xl">
           <p className="hero-kicker mb-3 inline-flex items-center gap-2 rounded-sm border border-gold/40 bg-ink/50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-2 backdrop-blur">
             <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
-            Série originale Dramini
+            Série originale Teledram
           </p>
           <h1 className="text-display hero-title text-5xl font-semibold text-bone sm:text-6xl md:text-7xl">
             {drama.title}

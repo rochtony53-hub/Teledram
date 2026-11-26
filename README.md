@@ -1,4 +1,4 @@
-# Dramini — Plateforme de dramas courts (premium)
+# Teledram — Plateforme de dramas courts (premium)
 
 Application web de streaming de séries courtes verticales, inspirée de DramaBox / NetShort / ReelShort.
 Interface **ultra-premium**, sombre et cinématique, **100 % sans compte** : tout fonctionne localement.

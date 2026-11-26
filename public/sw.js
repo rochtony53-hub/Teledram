@@ -1,5 +1,5 @@
-/* Dramini service worker — network-first for HTML navigations, cache-first for static assets. */
-const STATIC_CACHE = "dramini-static-v1";
+/* Teledram service worker — network-first for HTML navigations, cache-first for static assets. */
+const STATIC_CACHE = "teledram-static-v1";
 
 self.addEventListener("install", () => {
   self.skipWaiting();

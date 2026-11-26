@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ————— Dramini design tokens ————— */
+/* ————— Teledram design tokens ————— */
 @layer base {
   :root {
     /* primitives */
