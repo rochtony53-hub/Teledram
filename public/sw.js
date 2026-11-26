@@ -1,5 +1,5 @@
-/* Teledram service worker — network-first for HTML navigations, cache-first for static assets. */
-const STATIC_CACHE = "teledram-static-v1";
+/* Teledrama service worker — network-first for HTML navigations, cache-first for static assets. */
+const STATIC_CACHE = "teledrama-static-v1";
 
 self.addEventListener("install", () => {
   self.skipWaiting();

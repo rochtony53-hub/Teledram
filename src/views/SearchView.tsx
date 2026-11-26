@@ -87,7 +87,7 @@ export function SearchView({ onOpen, onPlay }: Props) {
           <IconSearch className="h-10 w-10 text-dim" />
           <p className="text-display text-2xl text-bone">Aucun résultat</p>
           <p className="max-w-sm text-sm text-mist">
-            Essayez un autre titre, un autre genre ou un mot-clé différent. Le catalogue Teledram grandit chaque semaine.
+            Essayez un autre titre, un autre genre ou un mot-clé différent. Le catalogue Teledrama grandit chaque semaine.
           </p>
           <button
             onClick={() => { setQuery(""); setFilter("Tout"); }}

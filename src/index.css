@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ————— Teledram design tokens ————— */
+/* ————— Teledrama design tokens ————— */
 @layer base {
   :root {
     /* primitives */

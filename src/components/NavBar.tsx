@@ -16,9 +16,9 @@ export function NavBar({ tab, onNavigate, count }: Props) {
     <>
       {/* desktop top bar */}
       <header className="fixed inset-x-0 top-0 z-40 hidden items-center justify-between bg-gradient-to-b from-ink/90 to-transparent px-8 py-4 backdrop-blur-sm md:flex">
-        <button onClick={() => onNavigate("home")} className="flex items-center gap-2.5" aria-label="Teledram — Accueil">
+        <button onClick={() => onNavigate("home")} className="flex items-center gap-2.5" aria-label="Teledrama — Accueil">
           <IconLogo className="h-8 w-8 text-gold" />
-          <span className="text-display text-2xl font-semibold tracking-wide text-bone">Teledram</span>
+          <span className="text-display text-2xl font-semibold tracking-wide text-bone">Teledrama</span>
         </button>
         <nav className="flex items-center gap-8">
           {(

@@ -111,7 +111,7 @@ export default function App() {
 
           <footer className="mt-14 border-t border-line px-4 py-8 md:px-8">
             <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-              <p className="text-display text-xl text-bone">Teledram</p>
+              <p className="text-display text-xl text-bone">Teledrama</p>
               <p className="text-xs text-dim">
                 Dramas courts premium · Sans publicité · Sans compte · Démo technique — les vidéos d'exemple proviennent d'archives libres de droits.
               </p>

@@ -118,7 +118,7 @@ export function PosterArt({
         <>
           {/* top micro-label */}
           <div className="relative z-10 flex items-center justify-between px-5 pt-6">
-            <span className="font-display text-[9px] font-semibold uppercase tracking-[0.3em] text-gold/90">Teledram</span>
+            <span className="font-display text-[9px] font-semibold uppercase tracking-[0.3em] text-gold/90">Teledrama</span>
             <span className="font-display text-[9px] font-semibold uppercase tracking-[0.3em] text-gold/50">{drama.year}</span>
           </div>
 
