@@ -1,4 +1,5 @@
 export interface Episode {
+  id?: number;
   n: number;
   title: string;
   duration: string; // "12:40"
@@ -281,3 +282,22 @@ export const DRAMAS: Drama[] = [
 export const GENRES = [...new Set(DRAMAS.map((d) => d.genre.split("·")[0].trim()))];
 
 export const byId = (id: string) => DRAMAS.find((d) => d.id === id);
+
+export const API_BASE = "https://teledrama-admin.pages.dev";
+
+/** Charge le catalogue depuis l'admin. Remplace les dramas de demo si l'admin en contient au moins un. */
+export async function loadRemote(): Promise<boolean> {
+  try {
+    const r = await fetch(API_BASE + "/api/dramas");
+    if (!r.ok) return false;
+    const remote = (await r.json()) as Drama[];
+    if (!Array.isArray(remote) || remote.length === 0) return false;
+    DRAMAS.length = 0;
+    DRAMAS.push(...remote);
+    GENRES.length = 0;
+    GENRES.push(...new Set(DRAMAS.map((d) => d.genre.split("·")[0].trim()).filter(Boolean)));
+    return true;
+  } catch {
+    return false;
+  }
+}

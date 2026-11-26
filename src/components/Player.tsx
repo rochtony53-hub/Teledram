@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { API_BASE } from "@/data/dramas";
 import type { Drama, Episode } from "@/data/dramas";
 import { IconBack, IconFullscreen, IconMute, IconNext, IconPause, IconPlay, IconVolume } from "./icons";
 import type { WatchProgress } from "@/hooks/useLocalStorage";
@@ -35,6 +36,11 @@ export function Player({ drama, startEp, resumeAt, onClose, onSaveProgress, onOp
 
   const epIndex = drama.episodes.findIndex((e) => e.n === ep.n);
   const nextEp = drama.episodes[epIndex + 1];
+
+  /* compte une vue par episode ouvert (episodes venant de l'admin) */
+  useEffect(() => {
+    if (ep.id) fetch(API_BASE + "/api/view/" + ep.id, { method: "POST", keepalive: true }).catch(() => {});
+  }, [ep.id]);
 
   const pokeControls = useCallback(() => {
     setControlsOn(true);

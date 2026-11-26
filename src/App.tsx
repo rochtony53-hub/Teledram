@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DRAMAS, byId } from "@/data/dramas";
+import { DRAMAS, byId, loadRemote } from "@/data/dramas";
 import type { Drama } from "@/data/dramas";
 import { useWatchHistory } from "@/hooks/useLocalStorage";
 import { NavBar } from "@/components/NavBar";
@@ -20,6 +20,10 @@ export default function App() {
   const [view, setView] = useState<View>({ name: "home" });
   const [session, setSession] = useState<Session>(null);
   const { history, favorites, upsertProgress, toggleFavorite, clearHistory } = useWatchHistory();
+  const [, setCatalogVersion] = useState(0);
+  useEffect(() => {
+    loadRemote().then((ok) => ok && setCatalogVersion((n) => n + 1));
+  }, []);
 
   /* scroll restoration per view */
   useEffect(() => {
@@ -41,7 +45,8 @@ export default function App() {
   const isFav = (id: string) => favorites.includes(id);
   const progressOf = (dramaId: string, ep: number) => history.find((h) => h.dramaId === dramaId && h.ep === ep);
 
-  const featured = DRAMAS.filter((d) => d.featured);
+  const featuredRaw = DRAMAS.filter((d) => d.featured);
+  const featured = featuredRaw.length ? featuredRaw : DRAMAS.slice(0, 3);
   const trending = [...DRAMAS].sort((a, b) => (a.trending ?? 99) - (b.trending ?? 99)).slice(0, 6);
   const news = DRAMAS.filter((d) => d.isNew);
   const romance = DRAMAS.filter((d) => d.genre.includes("Romance") || d.tags.includes("amour"));
@@ -68,11 +73,13 @@ export default function App() {
               ))}
             </Rail>
 
-            <Rail title="Nouveautés" icon={<IconSparkle className="h-5 w-5" />}>
+            {news.length > 0 && (
+<Rail title="Nouveautés" icon={<IconSparkle className="h-5 w-5" />}>
               {news.map((d) => (
                 <PosterCard key={d.id} drama={d} onOpen={openDrama} onPlay={(dd) => play(dd, 1)} />
               ))}
             </Rail>
+)}
 
             {history.length > 0 && (
               <Rail title="Reprendre" icon={<IconClock className="h-5 w-5" />}>
@@ -84,23 +91,29 @@ export default function App() {
               </Rail>
             )}
 
-            <Rail title="Romance">
+            {romance.length > 0 && (
+<Rail title="Romance">
               {romance.map((d) => (
                 <PosterCard key={d.id} drama={d} onOpen={openDrama} onPlay={(dd) => play(dd, 1)} />
               ))}
             </Rail>
+)}
 
-            <Rail title="Intense et captivant">
+            {intense.length > 0 && (
+<Rail title="Intense et captivant">
               {intense.map((d) => (
                 <PosterCard key={d.id} drama={d} onOpen={openDrama} onPlay={(dd) => play(dd, 1)} />
               ))}
             </Rail>
+)}
 
-            <Rail title="Fantastique et ailleurs">
+            {fantastic.length > 0 && (
+<Rail title="Fantastique et ailleurs">
               {fantastic.map((d) => (
                 <PosterCard key={d.id} drama={d} onOpen={openDrama} onPlay={(dd) => play(dd, 1)} />
               ))}
             </Rail>
+)}
 
             <Rail title="Tout le catalogue" icon={<IconHeart className="h-5 w-5" />}>
               {DRAMAS.map((d) => (
